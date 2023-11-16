@@ -1,0 +1,42 @@
+.title{
+    color: var(--grey-extra-dark, #212121);
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
+    line-height: normal;
+    /* margin-top: 118px; */
+}
+.welcomeImg{
+    margin-top: 66px;
+}
+.btnExit{
+    margin-top: 50px;
+}
+.confirm-btn{
+    max-width: 270px;
+}
+.modal{
+    position: absolute;
+    width: 343px;
+    height: 200px;
+    display: inline-flex;
+    /* padding: 16px; */
+    flex-direction: column;
+    align-items: center;
+    /* gap: 24px; */
+    border-radius: 20px;
+    background: #FFF;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.overlay{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.offscreen{
+    display: none;
+}

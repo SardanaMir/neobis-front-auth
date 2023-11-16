@@ -1,0 +1,12 @@
+.title{
+    color: var(--grey-extra-dark, #212121);
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
+    line-height: normal;
+    /* margin-top: 100px; */
+}
+.welcomeImg{
+    margin-top: 66px;
+    /* margin-bottom: 110px; */
+}

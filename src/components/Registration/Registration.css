@@ -1,0 +1,17 @@
+li{
+    color: var(--grey-medium-dark, #767676);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 166.667% */
+    text-decoration: none;
+}
+ul{
+    margin-top: 7px;
+}
+.registr-title{
+    margin-top: 40px;
+}
+.registr-btn{
+    margin-bottom: 158px;
+}
