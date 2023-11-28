@@ -15,3 +15,12 @@ ul{
 .registr-btn{
     margin-bottom: 158px;
 }
+.isSubmitting{
+    opacity: 0.6;
+}
+.red{
+    color: red
+}
+.green{
+    color: green;
+}
