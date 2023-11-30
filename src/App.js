@@ -1,11 +1,11 @@
 import './App.css';
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import LogIn from './components/LogIn/LogIn';
-import Welcome from './components/Welcome/Welcome';
-import Enter from './components/Enter/Enter';
-import Registration from './components/Registration/Registration';
-import AfterRegister from'./components/AfterRegister/AfterRegister';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LogIn from './pages/LogIn/LogIn';
+import Welcome from './pages/Welcome/Welcome';
+import Enter from './pages/Enter/Enter';
+import Registration from './pages/Registration/Registration';
+import AfterRegister from'./pages/AfterRegister/AfterRegister';
 
 function App() {
   return (

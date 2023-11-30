@@ -5,7 +5,6 @@ import axios from 'axios';
 import Enter from '../Enter/Enter';
 
 function LogIn() {    
-    
     const userRef = useRef();
     const errRef = useRef();
 
@@ -79,9 +78,7 @@ function LogIn() {
                         <input type={passwordVisible ? 'text' : 'password'} id='password' className='passwordInput' onChange={(e) => setPwd(e.target.value)} value={pwd} placeholder='Пароль (тоже введи)' required/>
                         <img onClick={togglePasswordVisibility} className="passwordIcon" src={passwordVisible ? "./img/icons/eye_slash.svg" : "./img/icons/eye.svg"} alt="" />
                     </div>
-
                     <button type='submit' className='loginBtn'>Войти</button>
-
                 </form>
                 <Link to={'/register'} className='login-create white-btn'>У меня еще нет аккаунта</Link>
             </div>

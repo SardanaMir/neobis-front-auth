@@ -8,6 +8,7 @@ li{
 }
 ul{
     margin-top: 7px;
+    margin-left: 20px;
 }
 .registr-title{
     margin-top: 40px;
@@ -23,4 +24,8 @@ ul{
 }
 .green{
     color: green;
+}
+.error{
+    font-size: 12px;
+    margin-top: 5px;
 }

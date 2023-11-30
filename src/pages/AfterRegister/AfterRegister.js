@@ -1,6 +1,6 @@
 import './AfterRegister.css';
 import {useState} from 'react';
-import Header from "../Header/Header";
+import Header from '../../components/Header/Header';
 
 function AfterRegister (){
     const [success, setSuccess] = useState('');
