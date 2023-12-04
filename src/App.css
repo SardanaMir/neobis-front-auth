@@ -4,11 +4,13 @@
   margin: 0;
   font-family: 'Open Sans';
 }
+section{
+  height: 100vh;
+}
 .container{
   display: block;
   margin: 0 auto;
-  max-width: 343px;
-  height: 100vh;  
+  width: 343px;
   padding: 10px;
 }
 .fl-col-ai-cen{
@@ -47,22 +49,16 @@ h2{
   font-weight: 600;
   line-height: normal;
 }
-/* img{
+.white-btn{
   display: block;
   margin: 0 auto;
-} */
-.white-btn{
+  width: 100%;
   margin-top: 28px;
-  display: flex;
-  width: 343px;
-  padding: 13px 16px;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
   border-radius: 12px;
   background: #FFF;
   border: none;
   font-weight: 600;
-  margin-bottom: 160px;
   cursor: pointer;
 }
 

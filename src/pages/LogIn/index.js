@@ -4,6 +4,8 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Enter from '../Enter';
+import BrandDecor from '../../components/BrandDecor';
+
 import './LogIn.css';
 import '../../index.css';
 
@@ -64,11 +66,13 @@ function LogIn() {
     };
 
   return (
-    <div>
+    <>
         {success ? (
             <Enter/>
         ) : (
-        <section className="LogIn">
+
+        <div className="wrapper">
+            <BrandDecor/>
             <div className="container">
                 {
                 error &&
@@ -85,8 +89,8 @@ function LogIn() {
                 theme="light"
                 />
                 }
-                
-                <img className="mt25px" src="./img/img_01.png" alt="человек сидит на подоконнике" />
+
+                <img className="login-img mt25px" src="./img/login-bg.png" alt="глобус" />
                 <h2 className='subtitle'>Вэлком бэк!</h2>
 
                 <form onSubmit={handleSubmit}>
@@ -100,8 +104,7 @@ function LogIn() {
                     value={user} 
                     placeholder='Введи туда-сюда логин' 
                     required/>
-                    
-                    <div className='password'>
+                    <div className='input-wrapper'>
                         <input 
                         type={passwordVisible ? 'text' : 'password'} 
                         id='password' className='passwordInput' 
@@ -113,14 +116,14 @@ function LogIn() {
                         className="passwordIcon" 
                         src={passwordVisible ? "./img/icons/eye_slash.svg" : "./img/icons/eye.svg"} alt="" />
                     </div>
-
                     <button type='submit' className='loginBtn'>Войти</button>
                 </form>
                 <Link to={'/register'} className='login-create white-btn'>У меня еще нет аккаунта</Link>
             </div>
-        </section>
+        </div>
+
         )}
-    </div>
+    </>
   );
 }
 

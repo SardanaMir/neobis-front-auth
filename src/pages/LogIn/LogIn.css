@@ -1,72 +1,74 @@
-.LogIn{
+.wrapper{
     height: 100vh;
+    display: flex;
+    align-items: center;
 }
 form{
     margin-top: 28px;
 }
+
 .loginInput, .passwordInput{
     margin-top: 14px;
-    display: flex;
-    width: 311px;
+    width: calc(100% - 15px);
     height: 26px;
-    padding: 13px 16px;
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
+    padding: 13px 0;
+    padding-left: 15px;
     border-radius: 12px;
     background: var(--grey-extra-light, #F8F8F8);
     border: none;
-    /* padding-right: 10px; */
 }
-.password{
+.login-img{
+    display: block;
+    margin: 0 auto;
+}
+.login-bg{
+    display: none;
+}
+.input-wrapper{
     position: relative;
+    width: 100%;
 }
-.password img{
+.passwordIcon{
     position: absolute;
-    right: 0;
-    top: 8px;
+    right: -3px;
+    top: 23px;
     padding: 10px 13px;
+    cursor: pointer;
 }
 .loginBtn{
-    display: flex;
-    width: 343px;
+    width: 100%;
     padding: 13px 16px;
-    justify-content: center;
-    align-items: center;
     border-radius: 12px;
     background: var(--button-color-light, #292929);
     color: #fff;
     margin-top: 24px;
     border: none;
     cursor: pointer;
+    text-align: center;
 }
-.errmsg{
-    min-width: 230px;
-    height: 25px;
 
-    display: inline-flex;
-    padding: 15px 16px;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    border-radius: 12px;
-    border: 2px solid #EC0000;
-    background: #FFF;
-
-    color: #EC0000;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px; /* 150% */
-    margin-top: 20px;
-    
-    position: absolute;
-    transition: all 0.5s;
-    left: 50%;
-    transform: translate(-50%, 0);
-}
 .red{
     color: red;
 }
 .green{
     color: #1BA228;
 }
+
+@media (min-width: 1024px) {
+    .login-img{
+        display: none;
+    }
+    .login-bg{
+        display: block;
+    }
+    .wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 800px;
+        margin-right: auto;
+        margin-left: auto;
+        /* padding-top: 150px; */
+    }
+}
+

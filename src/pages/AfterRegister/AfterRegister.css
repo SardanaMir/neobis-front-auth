@@ -12,3 +12,9 @@
 .divider{
     margin-top: 40px;
 }
+
+@media (min-width: 1024px) {
+    .reg-img{
+        display: none;
+    }
+}

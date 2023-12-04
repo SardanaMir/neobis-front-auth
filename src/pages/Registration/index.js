@@ -1,6 +1,7 @@
 import './Registration.css';
 import React, {useEffect, useState} from 'react';
 import Header from '../../components/Header/Header';
+import BrandDecor from '../../components/BrandDecor'; 
 import { useFormik } from 'formik';
 import { basicSchema,  } from '../../schema';
 
@@ -55,9 +56,10 @@ function Registration() {
     }, [values.password])
 
   return (
-    <div>
-        <Header/>
-        <div  className="container fl-col-ai-cen">
+    <div className='wrapper'>
+        <BrandDecor/>
+        <div className="container fl-col-ai-cen">
+            <Header/>
             <h2 className='registr-title'>Создать аккаунт Lorby</h2>
             <form onSubmit={handleSubmit}>
                 <input
@@ -68,8 +70,8 @@ function Registration() {
                     placeholder="Введи адрес почты"
                     onBlur={handleBlur}
                     className='loginInput' 
+                    required
                 />
-                {errors.email && touched.email && <p className="error">{errors.email}</p>}
                 <input 
                     value={values.username}
                     onChange={handleChange}
@@ -78,9 +80,9 @@ function Registration() {
                     id="username"
                     className='passwordInput' 
                     placeholder='Придумай логин'
+                    required
                 />
-                {errors.username && touched.username && (<p className="error">{errors.username}</p>)}
-                <div className='password'>
+                <div className='input-wrapper'>
                     <input 
                     value={values.password}
                     onChange={handleChange}
@@ -89,7 +91,12 @@ function Registration() {
                     type={passwordVisible1 ? 'text' : 'password'} 
                     className='passwordInput' 
                     placeholder='Создай пароль' />
-                    <img onClick={togglePasswordVisibility} className="passwordIcon" id='eye1' src={passwordVisible1 ? "./img/icons/eye_slash.svg" : "./img/icons/eye.svg"} alt="" />
+                    <img onClick={togglePasswordVisibility} 
+                    className="passwordIcon" 
+                    id='eye1' 
+                    src={passwordVisible1 ? "./img/icons/eye_slash.svg" : "./img/icons/eye.svg"} alt="" 
+                    required
+                    />
                 </div>  
                 <>
                     {
@@ -127,13 +134,12 @@ function Registration() {
                             <li className={isSpecialSymbol ? 'green' : 'red'}>
                                 Минимум 1 спецсимвол (!, ", #, $...)
                                 <img src={isSpecialSymbol ? './img/icons/ok.svg' : './img/icons/error.svg'} alt="" />
-
                             </li>
                         </ul> 
                         )
                     }
                 </>          
-                <div className='password'>
+                <div className='input-wrapper'>
                     <input 
                     value={values.confirmPassword}
                     onChange={handleChange}
@@ -141,10 +147,12 @@ function Registration() {
                     type={passwordVisible2 ? 'text' : 'password'} 
                     className='passwordInput' 
                     id="confirmPassword"
-                    placeholder='Повтори пароль'/>
-                    <img onClick={togglePasswordVisibility} className="passwordIcon" id='eye2' src={passwordVisible2 ? "./img/icons/eye_slash.svg" : "./img/icons/eye.svg"} alt="" />
+                    placeholder='Повтори пароль'
+                    required
+                    />
+                    <img onClick={togglePasswordVisibility} className="passwordIcon" id='eye2' 
+                    src={passwordVisible2 ? "./img/icons/eye_slash.svg" : "./img/icons/eye.svg"} alt="" />
                 </div>
-                {errors.confirmPassword && touched.confirmPassword && (<p className="error">{errors.confirmPassword}</p>)}
                 <button disabled={isSubmitting} type='submit' className='loginBtn registr-btn'>Далее</button>
             </form>
         </div>
