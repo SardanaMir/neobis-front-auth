@@ -20,12 +20,18 @@ ul{
     opacity: 0.6;
 }
 .red{
-    color: red
+    color: red;
+    display: flex;
 }
 .green{
     color: green;
+    display: flex;
+
 }
 .error{
     font-size: 12px;
     margin-top: 5px;
+}
+.msg{
+    color: #111;
 }

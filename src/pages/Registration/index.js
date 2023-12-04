@@ -13,8 +13,6 @@ function Registration() {
     const [isSpecialSymbol, setIsSpecialSymbol] = useState()
 
     const onSubmit = async (values, actions) => {
-        // console.log(values);
-        // console.log(actions);
         await new Promise((resolve) => setTimeout(resolve, 1000));
         actions.resetForm();
         const userInfo = values;
@@ -53,6 +51,7 @@ function Registration() {
         setIsLetter(values.password.match(/[A-Z]/) && values.password.match(/[a-z]/))
         setIsNumber(values.password.match(/[0-9]/));
         setIsSpecialSymbol(values.password.match(/[!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/))
+        console.log(values.password)
     }, [values.password])
 
   return (
@@ -92,20 +91,48 @@ function Registration() {
                     placeholder='Создай пароль' />
                     <img onClick={togglePasswordVisibility} className="passwordIcon" id='eye1' src={passwordVisible1 ? "./img/icons/eye_slash.svg" : "./img/icons/eye.svg"} alt="" />
                 </div>  
-                <ul>
-                    <li className={isMaxMinLength ? 'green' : 'red'}>
-                        От 8 до 15 символов 
-                    </li>
-                    <li className={isLetter ? 'green' : 'red'} >
-                        Строчные и прописные буквы
-                    </li>
-                    <li className={isNumber ? 'green' : 'red'}>
-                        Минимум 1 цифра
-                    </li>
-                    <li className={isSpecialSymbol ? 'green' : 'red'}>
-                        Минимум 1 спецсимвол (!, ", #, $...)
-                    </li>
-                </ul>             
+                <>
+                    {
+                    !touched.password ?
+                        (
+                        <ul> 
+                            <li className='msg'>
+                                От 8 до 15 символов 
+                            </li>
+                            <li className='msg'>
+                                Строчные и прописные буквы
+                            </li>
+                            <li className='msg'>
+                                Минимум 1 цифра
+                            </li>
+                            <li className='msg'>
+                                Минимум 1 спецсимвол (!, ", #, $...)
+                            </li> 
+                        </ul> 
+                        ) : (
+                        <ul> 
+                            <li className={isMaxMinLength ? 'green' : 'red'}>
+                                От 8 до 15 символов 
+                                <img src={isMaxMinLength ? './img/icons/ok.svg' : './img/icons/error.svg'} alt="" />
+
+                            </li>
+                            <li className={isLetter ? 'green' : 'red'} >
+                                Строчные и прописные буквы
+                                <img src={isLetter ? './img/icons/ok.svg' : './img/icons/error.svg'} alt="" />
+                            </li>
+                            <li className={isNumber ? 'green' : 'red'}>
+                                Минимум 1 цифра
+                                <img src={isNumber ? './img/icons/ok.svg' : './img/icons/error.svg'} alt="" />
+                            </li>
+                            <li className={isSpecialSymbol ? 'green' : 'red'}>
+                                Минимум 1 спецсимвол (!, ", #, $...)
+                                <img src={isSpecialSymbol ? './img/icons/ok.svg' : './img/icons/error.svg'} alt="" />
+
+                            </li>
+                        </ul> 
+                        )
+                    }
+                </>          
                 <div className='password'>
                     <input 
                     value={values.confirmPassword}

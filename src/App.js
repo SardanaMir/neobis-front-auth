@@ -1,11 +1,11 @@
 import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LogIn from './pages/LogIn/LogIn';
-import Welcome from './pages/Welcome/Welcome';
-import Enter from './pages/Enter/Enter';
-import Registration from './pages/Registration/Registration';
-import AfterRegister from'./pages/AfterRegister/AfterRegister';
+import LogIn from './pages/LogIn/';
+import Welcome from './pages/Welcome/';
+import Enter from './pages/Enter/';
+import Registration from './pages/Registration/';
+import AfterRegister from'./pages/AfterRegister/';
 
 function App() {
   return (

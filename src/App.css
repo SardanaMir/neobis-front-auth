@@ -47,10 +47,10 @@ h2{
   font-weight: 600;
   line-height: normal;
 }
-img{
+/* img{
   display: block;
   margin: 0 auto;
-}
+} */
 .white-btn{
   margin-top: 28px;
   display: flex;
