@@ -2,7 +2,8 @@ import {useState} from 'react';
 import Header from '../../components/Header/Header';
 import ModalSendLink from '../../components/ModalSendLink';
 import BrandDecor from '../../components/BrandDecor';
-import './AfterRegister.css'
+import './AfterRegister.css';
+
 function AfterRegister (){
     const [openModal, setOpenModal] = useState(false);
 

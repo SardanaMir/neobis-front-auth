@@ -20,9 +20,9 @@ function LogIn() {
 
     const [passwordVisible, setPasswordVisible] = useState(false);
 
-    // useEffect(() =>{
-    //     userRef.current.focus();
-    // }, []);
+    useEffect(() =>{
+        userRef.current.focus();
+    }, []);
 
     useEffect(() =>{
         setError(false);
@@ -49,13 +49,13 @@ function LogIn() {
         }catch(err){
             setError(true)
             if(!err?.response){
-                toast('No server response')
+                toast.error('No server response')
             }else if(err.response?.status === 400){
-                toast('Missing username or password');
+                toast.error('Missing username or password');
             }else if (err.response?.status === 401){
-                toast('Unauthorized')
+                toast.error('Unauthorized')
             }else {
-                toast('Неверный логин или пароль')
+                toast.error('Неверный логин или пароль')
             }
             // errRef.current.focus();
         }

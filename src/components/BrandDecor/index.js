@@ -1,9 +1,10 @@
+import './BrandDecor.css'
 function BrandDecor (){
     return (
-        <div>
+        <div className="branddecor-wrapper">
             <img className="login-bg" src="./img/bg.png" alt="человек сидит на балконе" />
-            <h1 className='title'>Lorby</h1>
-            <h2 className='subtitle'>Твой личный репетитор</h2>
+            <h1 className='title main-title'>Lorby</h1>
+            <h2 className='subtitle main-subtitle'>Твой личный репетитор</h2>
         </div>
     )
 }
