@@ -20,24 +20,7 @@ function Registration() {
     const [isSpecialSymbol, setIsSpecialSymbol] = useState();
     const [success, setSuccess] = useState(false);
     const [requestError, setRequestError] = useState(false);
-
-    const onSubmit = async (values, actions) => {
-        delete values.confirmPassword;
-        const userInfo = values;
-
-        try{
-            const response = await register(userInfo)
-            setSuccess(true)
-            actions.resetForm();
-        }
-        catch(err){
-            setRequestError(true)
-            if(err?.response){
-                toast.error('Произошла ошибка')
-            }
-        }
-    };
-    
+ 
     const {
         values,
         errors,
@@ -57,6 +40,25 @@ function Registration() {
         onSubmit,
     });
 
+    const onSubmit = async (values, actions) => {
+        delete values.confirmPassword;
+        const userInfo = values;
+
+        try{
+            const response = await register(userInfo)
+            setSuccess(true)
+            actions.resetForm();
+        }
+        catch(err){
+            console.log(err)
+            setRequestError(true)
+            if(err?.response){
+                toast.error('Произошла ошибка')
+            } else if(+err.response?.data.status === 400){
+                toast.error(err.response?.data.message)
+            }
+        }
+    };
     const togglePasswordVisibility = (e) => {
         if(e.target.id === 'eye1'){
             setPasswordVisible1(!passwordVisible1);
@@ -75,6 +77,7 @@ function Registration() {
     useEffect(() =>{
         emailRef.current.focus();
     }, []);
+    
 
   return (
     <>
