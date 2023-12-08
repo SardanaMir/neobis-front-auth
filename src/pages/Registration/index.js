@@ -1,10 +1,14 @@
-import './Registration.css';
+
 import React, {useEffect, useState, useRef} from 'react';
 import { useFormik } from 'formik';
 import { basicSchema,  } from '../../schema';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from '../../components/Header/Header';
 import BrandDecor from '../../components/BrandDecor'; 
 import AfterRegister from '../AfterRegister'
+import {register} from '../../api'
+import './Registration.css';
 
 function Registration() {
     const emailRef = useRef();
@@ -13,15 +17,25 @@ function Registration() {
     const [isMaxMinLength, setIsMaxMinLength] = useState('');
     const [isLetter, setIsLetter] = useState(false);
     const [isNumber, setIsNumber] = useState(false);
-    const [isSpecialSymbol, setIsSpecialSymbol] = useState()
+    const [isSpecialSymbol, setIsSpecialSymbol] = useState();
     const [success, setSuccess] = useState(false);
+    const [requestError, setRequestError] = useState(false);
 
     const onSubmit = async (values, actions) => {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        actions.resetForm();
+        delete values.confirmPassword;
         const userInfo = values;
-        console.log(userInfo)
-        //тут отправка данных в бек
+
+        try{
+            const response = await register(userInfo)
+            setSuccess(true)
+            actions.resetForm();
+        }
+        catch(err){
+            setRequestError(true)
+            if(err?.response){
+                toast.error('Произошла ошибка')
+            }
+        }
     };
     
     const {
@@ -56,7 +70,6 @@ function Registration() {
         setIsLetter(values.password.match(/[A-Z]/) && values.password.match(/[a-z]/))
         setIsNumber(values.password.match(/[0-9]/));
         setIsSpecialSymbol(values.password.match(/[!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/))
-        console.log(values.password)
     }, [values.password])
 
     useEffect(() =>{
@@ -69,8 +82,23 @@ function Registration() {
             <AfterRegister/>
         ):(
             <div className='wrapper'>
+            {
+                requestError &&
+                <ToastContainer  
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                />
+            }
             <BrandDecor/>
-            <div className="container fl-col-ai-cen">
+            <div className="container">
                 <Header/>
                 <h2 className='registr-title'>Создать аккаунт Lorby</h2>
                 <form onSubmit={handleSubmit}>
@@ -85,6 +113,8 @@ function Registration() {
                         className='loginInput' 
                         required
                     />
+                    {errors.email && touched.email && <p className="error">{errors.email}</p>}
+
                     <input 
                         value={values.username}
                         onChange={handleChange}
@@ -95,6 +125,8 @@ function Registration() {
                         placeholder='Придумай логин'
                         required
                     />
+                    {errors.username && touched.username && (<p className="error">{errors.username}</p>)}
+
                     <div className='input-wrapper'>
                         <input 
                         value={values.password}
@@ -166,6 +198,7 @@ function Registration() {
                         <img onClick={togglePasswordVisibility} className="passwordIcon" id='eye2' 
                         src={passwordVisible2 ? "./img/icons/eye_slash.svg" : "./img/icons/eye.svg"} alt="" />
                     </div>
+                    {errors.confirmPassword && touched.confirmPassword && (<p className="error">{errors.confirmPassword}</p>)}
                     <button disabled={isSubmitting} type='submit' className='loginBtn registr-btn'>Далее</button>
                 </form>
             </div>

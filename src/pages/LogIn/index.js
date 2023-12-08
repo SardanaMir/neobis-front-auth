@@ -1,23 +1,19 @@
 import {useRef, useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Enter from '../Enter';
 import BrandDecor from '../../components/BrandDecor';
-
+import {login} from '../../api'
 import './LogIn.css';
-import '../../index.css';
+
 
 function LogIn() {    
     const userRef = useRef();
-    const errRef = useRef();
-
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
-
     const [passwordVisible, setPasswordVisible] = useState(false);
 
     useEffect(() =>{
@@ -30,18 +26,11 @@ function LogIn() {
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
-        console.log(user, pwd);
         try{
-            const response = await axios.post( 
-                JSON.stringify({'username': user, 'password': pwd}),
-                {
-                    header: {'Content-Type': 'application/json'},
-                    withCredentials: true
-                }
-            );
-            console.log(JSON.stringify(response?.data));
-            const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
+            const userInfoForLogin = {'username': user, 'password': pwd}
+            const response = await login(userInfoForLogin)
+            const accessToken = response.token
+            // const roles = response?.data?.roles;
             // setAuth({user, pwd, roles, accessToken})
             setUser('');
             setPwd('');
@@ -49,15 +38,13 @@ function LogIn() {
         }catch(err){
             setError(true)
             if(!err?.response){
-                toast.error('No server response')
-            }else if(err.response?.status === 400){
+                toast.error('Сервер не отвечает')
+            }else if(err.response?.data.status === 400){
                 toast.error('Missing username or password');
-            }else if (err.response?.status === 401){
-                toast.error('Unauthorized')
-            }else {
+            } else {
                 toast.error('Неверный логин или пароль')
             }
-            // errRef.current.focus();
+            userRef.current.focus();
         }
     }
 
@@ -70,7 +57,6 @@ function LogIn() {
         {success ? (
             <Enter/>
         ) : (
-
         <div className="wrapper">
             <BrandDecor/>
             <div className="container">
@@ -121,7 +107,6 @@ function LogIn() {
                 <Link to={'/register'} className='login-create white-btn'>У меня еще нет аккаунта</Link>
             </div>
         </div>
-
         )}
     </>
   );
