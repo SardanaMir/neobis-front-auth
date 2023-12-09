@@ -1,13 +1,14 @@
 
 import React, {useEffect, useState, useRef} from 'react';
+import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { basicSchema,  } from '../../schema';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from '../../components/Header/Header';
 import BrandDecor from '../../components/BrandDecor'; 
-import AfterRegister from '../AfterRegister'
-import {register} from '../../api'
+import ModalSendLink from '../../components/ModalSendLink';
+import {register, sendMail} from '../../api'
 import './Registration.css';
 
 function Registration() {
@@ -20,7 +21,26 @@ function Registration() {
     const [isSpecialSymbol, setIsSpecialSymbol] = useState();
     const [success, setSuccess] = useState(false);
     const [requestError, setRequestError] = useState(false);
- 
+    
+    const onSubmit = async (values, actions) => {
+        // delete values.confirmPassword;
+        // const userInfo = values;
+
+        try{
+            const response = await register(userInfo)
+            setSuccess(true)
+            // actions.resetForm();
+        }
+        catch(err){
+            console.log(err)
+            setRequestError(true)
+            if(err?.response){
+                toast.error('Произошла ошибка')
+            } else if(+err.response?.data.status === 400){
+                toast.error(err.response?.data.message)
+            }
+        }
+    };
     const {
         values,
         errors,
@@ -40,25 +60,8 @@ function Registration() {
         onSubmit,
     });
 
-    const onSubmit = async (values, actions) => {
-        delete values.confirmPassword;
-        const userInfo = values;
+    const userInfo = values
 
-        try{
-            const response = await register(userInfo)
-            setSuccess(true)
-            actions.resetForm();
-        }
-        catch(err){
-            console.log(err)
-            setRequestError(true)
-            if(err?.response){
-                toast.error('Произошла ошибка')
-            } else if(+err.response?.data.status === 400){
-                toast.error(err.response?.data.message)
-            }
-        }
-    };
     const togglePasswordVisibility = (e) => {
         if(e.target.id === 'eye1'){
             setPasswordVisible1(!passwordVisible1);
@@ -78,11 +81,51 @@ function Registration() {
         emailRef.current.focus();
     }, []);
     
+    const [openModal, setOpenModal] = useState(false);
 
+    const handleSend = async (values) =>{
+        console.log(userInfo)
+        try{
+            const response = await sendMail(userInfo)
+            console.log(response)
+            // actions.resetForm();
+            setOpenModal(true);
+        }
+        catch(err){
+            console.log(err)
+            setRequestError(true)
+            if(err?.response){
+                toast.error('Произошла ошибка')
+            } else if(+err.response?.data.status === 400){
+                toast.error(err.response?.data.message)
+            }
+        }
+
+    }
+    console.log('values', values)
+    console.log('userinfo', userInfo)
   return (
     <>
         {success ? (
-            <AfterRegister/>
+        <div className="wrapper">
+            {openModal && <ModalSendLink setOpenModal={setOpenModal}/>}
+            <BrandDecor/>
+            <div className="container fl-col-ai-cen ">
+                <Header/>
+                <h2 className='registr-title'>
+                    Выслали письмо со ссылкой для завершения регистрации на example@gmail.com
+                </h2>
+                <p className='descr mt25px'>
+                Если письмо не пришло, не спеши ждать совиную почту - лучше <span className='descr-bold'>проверь ящик “Спам” </span>
+                </p>
+                <div className='divider'>
+                (´｡• ω •｡`)
+                </div>
+                <img className="reg-img mt55" src="./img/afterregister.png" alt="" />
+                <button className='white-btn btnExit mb25' onClick={handleSend}>Письмо не пришло</button>
+                <Link className='loginBtn mt25px' to={'/login'}>Войти</Link>
+            </div>
+        </div>
         ):(
             <div className='wrapper'>
             {

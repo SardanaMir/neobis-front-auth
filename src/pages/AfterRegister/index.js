@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import ModalSendLink from '../../components/ModalSendLink';
 import BrandDecor from '../../components/BrandDecor';
@@ -30,6 +31,7 @@ function AfterRegister (){
                 </div>
                 <img className="reg-img mt55" src="./img/afterregister.png" alt="" />
                 <button className='white-btn btnExit mb25' onClick={handleSend}>Письмо не пришло</button>
+                <Link className='loginBtn mt25px' to={'/login'}>Войти</Link>
             </div>
         </div>
 

@@ -4,11 +4,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Enter from '../Enter';
 import BrandDecor from '../../components/BrandDecor';
-import {login} from '../../api'
 import './LogIn.css';
 
 
-function LogIn() {    
+function LogIn({login}) {    
     const userRef = useRef();
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
@@ -30,8 +29,6 @@ function LogIn() {
             const userInfoForLogin = {'username': user, 'password': pwd}
             const response = await login(userInfoForLogin)
             const accessToken = response.token
-            // const roles = response?.data?.roles;
-            // setAuth({user, pwd, roles, accessToken})
             setUser('');
             setPwd('');
             setSuccess(true);
@@ -102,7 +99,7 @@ function LogIn() {
                         className="passwordIcon" 
                         src={passwordVisible ? "./img/icons/eye_slash.svg" : "./img/icons/eye.svg"} alt="" />
                     </div>
-                    <button type='submit' className='loginBtn'>Войти</button>
+                    <button type='submit' className='loginBtn'>Войти</button> 
                 </form>
                 <Link to={'/register'} className='login-create white-btn'>У меня еще нет аккаунта</Link>
             </div>

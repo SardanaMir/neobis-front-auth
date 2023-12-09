@@ -18,3 +18,8 @@ export const register = async (data) =>{
     const res = await instance.post('registration', data)
     return res.data
 }
+
+export const sendMail = async (data) =>{
+    const res = await instance.post('resendMessage2', data)
+    return res.data
+}
