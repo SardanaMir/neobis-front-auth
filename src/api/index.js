@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'http://68.183.64.48:8081/auth/';
+const URL = 'https://68.183.64.48:8081/auth/';
 
 const instance = axios.create({
     baseURL: URL,
@@ -16,10 +16,5 @@ export const login = async (data) =>{
 
 export const register = async (data) =>{
     const res = await instance.post('registration', data)
-    return res.data
-}
-
-export const sendMail = async (data) =>{
-    const res = await instance.post('resendMessage2', data)
     return res.data
 }
