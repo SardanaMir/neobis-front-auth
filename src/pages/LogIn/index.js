@@ -36,7 +36,8 @@ function LogIn() {
             setError(true)
             if(err.response){
                 toast.error(err.response?.data.message)
-            }
+            } 
+
             userRef.current.focus();
         }
     }

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'https://68.183.64.48:8081/auth/';
+const URL = 'http://68.183.64.48:8081/auth/';
 
 const instance = axios.create({
     baseURL: URL,

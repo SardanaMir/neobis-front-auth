@@ -27,13 +27,14 @@ function Registration() {
             navigate('/registercompleted');
         }
         catch(err){
-            console.log(err)
             setRequestError(true)
             if(+err.response?.data.status === 400){
                 toast.error(err.response.data.message)
             } else if(err?.response){
                 toast.error('Произошла ошибка')
-            } 
+            } else if(err?.message){
+                toast.error('Сервер не отвечает')
+            }
         }
     };
 
